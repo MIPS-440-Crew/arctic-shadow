@@ -15,8 +15,8 @@ YACC_SRC = main.y
 ######################
 
 # generated files without the .c extension #
-LEX_GEN_ = "main.lex.yy"
-YACC_GEN_ = "main.p4.tab"
+LEX_GEN_ = main.lex.yy
+YACC_GEN_ = main.p4.tab
 ############################################
 
 all: $(TARGET)
