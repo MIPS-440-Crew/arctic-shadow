@@ -8,14 +8,14 @@ TARGET = program
 
 all: $(TARGET)
 
-$(TARGET): lex.yy.c y.tab.c
-	$(CC) -o $(TARGET) lex.yy.c y.tab.c
+$(TARGET): lex.yy.c parser.tab.c
+	$(CC) -o $(TARGET) lex.yy.c parser.tab.c
 
-lex.yy.c: $(LEX_FILE)
+lex.yy.c: $(LEX_FILE) parser.tab.h
 	$(LEX) $(LEX_FILE)
 
-y.tab.c: $(YACC_FILE)
+parser.tab.c: $(YACC_FILE)
 	$(YACC) -d $(YACC_FILE)
 
 clean:
-	rm -f lex.yy.c y.tab.c y.tab.h $(TARGET)
+	rm -f lex.yy.c parser.tab.c parser.tab.h $(TARGET)
