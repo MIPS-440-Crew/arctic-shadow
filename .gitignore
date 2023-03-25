@@ -3,3 +3,7 @@
 /main.lex.yy.c
 /main.output
 /arctic_shadow
+
+# ignore test input files (not the tests directory)
+/test*
+!/tests/
