@@ -6,7 +6,7 @@ CC = gcc
 LEX = flex
 YACC = bison
 CFLAGS = -g -Og -Wall -Wno-unused-variable -Wno-unused-function -std=c99
-LDFLAGS = -lfl
+LDFLAGS = 
 #######################
 
 # lex & yacc sources #
