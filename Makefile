@@ -1,12 +1,12 @@
 SOURCES =
-TARGET = arctic_shadow-ALPHA
+TARGET = arctic_shadow
 
 # compilers and flags #
 CC = gcc
 LEX = flex
 YACC = bison
 CFLAGS = -g -Og -Wall -Wno-unused-variable -Wno-unused-function -std=c99
-LDFLAGS = -ly -lfl
+LDFLAGS = -lfl
 #######################
 
 # lex & yacc sources #

@@ -1,6 +1,13 @@
 %{
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+extern int yylineno;
+extern int yylex();
+void yyerror(const char * s);
+
 %}
 
 %token ID INT
@@ -10,26 +17,33 @@
 
 %%
 
-stmt_list: /* empty */ | stmt_list stmt
-stmt: expr ';' | ID '=' expr ';'
+stmt_list: stmt_list stmt | %empty
 
-expr: INT
-    | ID
-    | expr '+' expr
-    | expr '-' expr
-    | expr '*' expr
-    | expr '/' expr
-    | '-' expr %prec UMINUS
-    | '(' expr ')'
-    ;
+stmt: expr ';' { printf("STATEMENT "); }
+    | ID '=' expr ';' { printf("ASSIGNMENT "); }
+
+expr: INT { printf("INT "); }
+    | ID { printf("ID "); }
+    | expr '+' expr { printf("PLUS "); }
+    | expr '-' expr { printf("MINUS "); }
+    | expr '*' expr { printf("TIMES "); }
+    | expr '/' expr { printf("DIVIDE "); }
+    | '-' expr %prec UMINUS { printf("NEGATE "); }
+    | '(' expr ')' { printf("PARENTHESIS "); }
 
 %%
 
 int main(void) {
+    
     yyparse();
+    
+    // no errors
+    printf("\nCompiled successfully\n");
+    
     return 0;
 }
 
-void yyerror(const char *s) {
-    fprintf(stderr, "error: %s\n", s);
+void yyerror(const char * s) {
+    fprintf(stderr, "error on line %d: %s\n", yylineno, s);
+    exit(1);
 }
