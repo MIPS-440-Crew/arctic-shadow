@@ -31,4 +31,4 @@ $(YACC_GEN_).c: $(YACC_SRC)
 	$(YACC) -o $@ -dv $(YACC_SRC)
 
 clean:
-	rm -f $(TARGET) $(LEX_GEN_).c $(YACC_GEN_).c $(YACC_GEN_).h
+	rm -f $(TARGET) $(LEX_GEN_).c $(YACC_GEN_).c $(YACC_GEN_).h main.output
