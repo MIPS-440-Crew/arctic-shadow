@@ -1,21 +1,34 @@
+SOURCES =
+TARGET = arctic_shadow-1.0
+
+# compilers and flags #
+CC = gcc
 LEX = flex
 YACC = bison
-CC = gcc
+CFLAGS = -g -Og -Wall -Wno-unused-variable -Wno-unused-function -std=c99
+LDFLAGS = -ly -lfl
+#######################
 
-LEX_FILE = lexer.l
-YACC_FILE = parser.y
-TARGET = program
+# lex & yacc sources #
+LEX_SRC = main.l
+YACC_SRC = main.y
+######################
+
+# generated files without the .c extension #
+LEX_GEN_ = "main.lex.yy"
+YACC_GEN_ = "main.p4.tab"
+############################################
 
 all: $(TARGET)
 
-$(TARGET): lex.yy.c parser.tab.c
-	$(CC) -o $(TARGET) lex.yy.c parser.tab.c
+$(TARGET): $(SOURCES) $(LEX_GEN_).c $(YACC_GEN_).c
+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(SOURCES) $(LEX_GEN_).c $(YACC_GEN_).c
 
-lex.yy.c: $(LEX_FILE) parser.tab.h
-	$(LEX) $(LEX_FILE)
+$(LEX_GEN_).c: $(LEX_SRC)
+	$(LEX) -o $@ $(LEX_SRC)
 
-parser.tab.c: $(YACC_FILE)
-	$(YACC) -d $(YACC_FILE)
+$(YACC_GEN_).c: $(YACC_SRC)
+	$(YACC) -o $@ -dv $(YACC_SRC)
 
 clean:
-	rm -f lex.yy.c parser.tab.c parser.tab.h $(TARGET)
+	rm -f $(TARGET) $(LEX_GEN_).c $(YACC_GEN_).c $(YACC_GEN_).h
