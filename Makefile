@@ -1,5 +1,5 @@
 SOURCES =
-TARGET = arctic_shadow-1.0
+TARGET = arctic_shadow-ALPHA
 
 # compilers and flags #
 CC = gcc

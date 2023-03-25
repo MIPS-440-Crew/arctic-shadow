@@ -1,3 +1,5 @@
-/lex.yy.c
-/parser.tab.c
-/parser.tab.h
+/main.tab.c
+/main.tab.h
+/main.lex.yy.c
+/main.output
+/arctic_shadow-*
